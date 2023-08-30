@@ -1,7 +1,6 @@
 import 'package:cards/components/deck_bubble.dart';
 import 'package:cards/services/local_store.dart';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 
 class DeckPage extends StatefulWidget {
   const DeckPage({super.key});
@@ -37,13 +36,6 @@ class _DeckPageState extends State<DeckPage> {
         )
       ];
     }
-    // get all the decks
-    // List<DeckMetaData> intermediary = await LocalStore.getDecks();
-    // List<int> counts = [];
-    // int index = 0;
-    // intermediary.forEach((element) async {
-    //   element.getCount();
-    // });
 
     var intermediary = (await LocalStore.getDecks());
     print("Dekcs retrieved");

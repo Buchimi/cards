@@ -39,60 +39,63 @@ class _CardViewState extends State<CardView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          width: widget.width ?? 400,
-          height: widget.height ?? 200,
-          child: Card(
-            elevation: 2.0,
-            color: widget.color,
-            child: Container(
-              decoration: BoxDecoration(border: Border.all()),
-              child: Column(
-                children: (!_editMode)
-                    ? ([
-                        Text(widget.card.title),
-                        Text(widget.card.description),
-                      ])
-                    : [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3.0),
-                                color: Colors.grey),
-                            child: Padding(
+        GestureDetector(
+          onLongPress: toggleOverlay,
+          child: SizedBox(
+            width: widget.width ?? 400,
+            height: widget.height ?? 200,
+            child: Card(
+              elevation: 2.0,
+              color: widget.color,
+              child: Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: Column(
+                  children: (!_editMode)
+                      ? ([
+                          Text(widget.card.title),
+                          Text(widget.card.description),
+                        ])
+                      : [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3.0),
+                                  color: Colors.grey),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextBox(
+                                    initText: "Hello",
+                                    onChange: (val) {
+                                      setState(() {
+                                        card.title = val;
+                                      });
+                                    },
+                                  )),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3.0),
+                                  color: Colors.grey),
+                              child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: TextBox(
-                                  initText: "Hello",
-                                  onChange: (val) {
+                                child: TextField(
+                                  decoration: const InputDecoration(
+                                      label: Text("Hello")),
+                                  onChanged: (val) {
                                     setState(() {
-                                      card.title = val;
+                                      card.description = val;
                                     });
                                   },
-                                )),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3.0),
-                                color: Colors.grey),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextField(
-                                decoration:
-                                    const InputDecoration(label: Text("Hello")),
-                                onChanged: (val) {
-                                  setState(() {
-                                    card.description = val;
-                                  });
-                                },
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                ),
               ),
             ),
           ),
